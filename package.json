@@ -1,0 +1,79 @@
+{
+    "name": "vscode-format-context-menu",
+    "displayName": "vscode-format-context-menu",
+    "description": "VSCode extension to format multiple files with right click context menu",
+    "version": "1.0.0",
+    "publisher": "lacroixdavid1",
+    "engines": {
+        "vscode": "^1.25.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.formatSelectedFilesFromExplorerContext",
+        "onCommand:extension.formatSelectedFilesFromScmContext",
+        "onCommand:extension.formatSelectedFileFromEditorTileContext"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "configuration":[
+            {
+                "title": "Format Context Menu",
+                "properties": {
+                    "formatContextMenu.view.saveAfterFormat": {
+						"type": "boolean",
+						"default": true,
+						"description": "Format Context Menu: Save file after formatting",
+						"scope": "window"
+					}
+                }
+            }
+        ],
+        "commands": [
+            {
+                "command": "extension.formatSelectedFilesFromExplorerContext",
+                "title": "Format"
+            },
+            {
+                "command": "extension.formatSelectedFilesFromScmContext",
+                "title": "Format"
+            },
+            {
+                "command": "extension.formatSelectedFileFromEditorTileContext",
+                "title": "Format"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "command": "extension.formatSelectedFilesFromExplorerContext"
+                }
+            ],
+            "scm/resourceState/context": [
+                {
+                    "command": "extension.formatSelectedFilesFromScmContext"
+                }
+            ],
+            "editor/title/context": [
+                {
+                    "command": "extension.formatSelectedFileFromEditorTileContext"
+                } 
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "tslint": "^5.8.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42"
+    }
+}
