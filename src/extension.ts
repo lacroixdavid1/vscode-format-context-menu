@@ -43,8 +43,8 @@ export function activate(context: vscode.ExtensionContext) {
             await formatUris(uris);
         }),
 
-        vscode.commands.registerCommand('extension.formatSelectedFileFromEditorTileContext', async (selectedFile: vscode.Uri) => {
-            await formatUris([selectedFile]);
+        vscode.commands.registerCommand('extension.formatSelectedFileFromEditorTileContext', async (clickedFile: vscode.Uri) => {
+            await formatUris([clickedFile]);
         }),
 
         vscode.commands.registerCommand('extension.formatSelectedFilesFromExplorerContext', async (clickedFile: vscode.Uri, selectedFiles: vscode.Uri[]) => {

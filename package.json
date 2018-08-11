@@ -1,10 +1,24 @@
 {
     "name": "vscode-format-context-menu",
-    "displayName": "vscode-format-context-menu",
+    "displayName": "Format in context menus",
     "description": "VSCode extension to format multiple files with right click context menu",
     "version": "1.0.0",
     "publisher": "lacroixdavid1",
     "icon": "assets/icon.png",
+    "license": "MIT",
+    "keywords": [
+        "format",
+        "context menu",
+        "format multiple files"
+      ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/lacroixdavid1/vscode-format-context-menu.git"
+    },
+    "homepage": "https://github.com/lacroixdavid1/vscode-format-context-menu",
+    "bugs": {
+        "url": "https://github.com/lacroixdavid1/vscode-format-context-menu/issues"
+    },
     "engines": {
         "vscode": "^1.25.0"
     },
@@ -18,17 +32,16 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        
-        "configuration":[
+        "configuration": [
             {
                 "title": "Format From Context Menu",
                 "properties": {
                     "formatContextMenu.saveAfterFormat": {
-						"type": "boolean",
-						"default": true,
-						"description": "Format Context Menu: Save file after formatting",
-						"scope": "window"
-					}
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Format Context Menu: Save file after formatting",
+                        "scope": "window"
+                    }
                 }
             }
         ],
@@ -60,7 +73,7 @@
             "editor/title/context": [
                 {
                     "command": "extension.formatSelectedFileFromEditorTileContext"
-                } 
+                }
             ]
         }
     },
