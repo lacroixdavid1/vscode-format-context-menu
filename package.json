@@ -4,7 +4,7 @@
     "description": "VSCode extension to format multiple files with right click context menu",
     "version": "1.0.0",
     "publisher": "lacroixdavid1",
-    "icon": "https://github.com/lacroixdavid1/vscode-format-context-menu/raw/master/assets/logo.png",
+    "icon": "assets/icon.png",
     "engines": {
         "vscode": "^1.25.0"
     },
