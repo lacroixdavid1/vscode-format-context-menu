@@ -5,6 +5,10 @@
     "version": "1.0.0",
     "publisher": "lacroixdavid1",
     "icon": "assets/icon.png",
+    "author": {
+        "name": "David Lacroix",
+        "email": "lacroix.david1@gmail.com"
+    },
     "license": "MIT",
     "keywords": [
         "format",
@@ -15,9 +19,10 @@
         "type": "git",
         "url": "https://github.com/lacroixdavid1/vscode-format-context-menu.git"
     },
-    "homepage": "https://github.com/lacroixdavid1/vscode-format-context-menu",
+    "homepage": "https://github.com/lacroixdavid1/vscode-format-context-menu/blob/master/README.md",
     "bugs": {
-        "url": "https://github.com/lacroixdavid1/vscode-format-context-menu/issues"
+        "url": "https://github.com/lacroixdavid1/vscode-format-context-menu/issues",
+        "email": "lacroix.david1@gmail.com"
     },
     "engines": {
         "vscode": "^1.25.0"
