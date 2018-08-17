@@ -2,7 +2,7 @@
     "name": "vscode-format-context-menu",
     "displayName": "Format in context menus",
     "description": "VSCode extension to format multiple files with right click context menu",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "lacroixdavid1",
     "icon": "assets/icon.png",
     "author": {
