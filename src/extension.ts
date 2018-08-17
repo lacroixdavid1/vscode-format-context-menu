@@ -6,7 +6,6 @@ import * as fs from 'fs';
 export function activate(context: vscode.ExtensionContext) {
 
     const formatUris = async (uris: vscode.Uri[]) => {
-        const forDemo = 0;
         const formatAfterSave = vscode.workspace.getConfiguration().get('formatContextMenu.saveAfterFormat') as boolean;
         for (let i = 0; i < uris.length; i++) {
             const uri = uris[i];
@@ -25,13 +24,15 @@ export function activate(context: vscode.ExtensionContext) {
     const getRecursiveUris = async (uris: vscode.Uri[]) => {
         let outputUris: vscode.Uri[] = [];
         for (let i = 0; i < uris.length; i++) {
-            if (fs.lstatSync(uris[i].fsPath).isDirectory()) {
-                outputUris = [...outputUris, ...await vscode.workspace.findFiles({
-                    base: uris[i].path,
-                    pattern: '**/*'
-                })];
-            } else {
-                outputUris.push(uris[i]);
+            if (fs.existsSync(uris[i].fsPath)) {
+                if (fs.lstatSync(uris[i].fsPath).isDirectory()) {
+                    outputUris = [...outputUris, ...await vscode.workspace.findFiles({
+                        base: uris[i].path,
+                        pattern: '**/*'
+                    })];
+                } else {
+                    outputUris.push(uris[i]);
+                }
             }
         }
         return outputUris;
