@@ -6,6 +6,7 @@ import * as fs from 'fs';
 export function activate(context: vscode.ExtensionContext) {
 
     const formatUris = async (uris: vscode.Uri[]) => {
+        const forDemo = 0;
         const formatAfterSave = vscode.workspace.getConfiguration().get('formatContextMenu.saveAfterFormat') as boolean;
         for (let i = 0; i < uris.length; i++) {
             const uri = uris[i];

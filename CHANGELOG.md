@@ -1,7 +1,8 @@
-# Change Log
-All notable changes to the "vscode-format-menu" extension will be documented in this file.
+## 1.0.2
+- Added demo in `README.md`
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## 1.0.1
+- Fixed extension `README.md` from vscode extension store
 
-## [Unreleased]
+## 1.0.0
 - Initial release

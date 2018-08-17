@@ -2,6 +2,8 @@
 
 This VSCode extension allows user to format one or multiple files with right click context menu.
 
+![Demo](https://github.com/lacroixdavid1/vscode-format-context-menu/blob/master/assets/demo.gif?raw=true)
+
 ## Features
 
 - Format one or multiple files from Explorer Context Menu
