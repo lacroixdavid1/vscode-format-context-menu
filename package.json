@@ -2,7 +2,7 @@
     "name": "vscode-format-context-menu",
     "displayName": "Format in context menus",
     "description": "VSCode extension to format multiple files with right click context menu",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "publisher": "lacroixdavid1",
     "icon": "assets/icon.png",
     "author": {
@@ -44,7 +44,13 @@
                     "formatContextMenu.saveAfterFormat": {
                         "type": "boolean",
                         "default": true,
-                        "description": "Format Context Menu: Save file after formatting",
+                        "description": "Save file after formatting.",
+                        "scope": "window"
+                    },
+                    "formatContextMenu.closeAfterSave": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Close file after saving. This does nothing unless you have enabled saving after formatting.",
                         "scope": "window"
                     }
                 }

@@ -6,7 +6,11 @@ import * as fs from 'fs';
 export function activate(context: vscode.ExtensionContext) {
 
     const formatUris = async (uris: vscode.Uri[]) => {
+
+        // Getting current settings
         const formatAfterSave = vscode.workspace.getConfiguration().get('formatContextMenu.saveAfterFormat') as boolean;
+        const closeAfterSave = vscode.workspace.getConfiguration().get('formatContextMenu.closeAfterSave') as boolean;
+
         for (let i = 0; i < uris.length; i++) {
             const uri = uris[i];
             try {
@@ -14,6 +18,9 @@ export function activate(context: vscode.ExtensionContext) {
                 await vscode.commands.executeCommand('editor.action.formatDocument', uri);
                 if (formatAfterSave) {
                     await vscode.commands.executeCommand('workbench.action.files.save', uri);
+                    if (closeAfterSave) {
+                        await vscode.commands.executeCommand('workbench.action.closeActiveEditor', uri);
+                    }
                 }
             } catch (exception) {
                 vscode.window.showWarningMessage(`Could not format file ${uri}`);
