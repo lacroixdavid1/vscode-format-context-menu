@@ -1,3 +1,7 @@
+## 1.0.4
+- Now shows progression.
+- Now cancellable.
+
 ## 1.0.3
 - Added a setting to close files after saving.
 

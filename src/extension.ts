@@ -8,24 +8,44 @@ export function activate(context: vscode.ExtensionContext) {
     const formatUris = async (uris: vscode.Uri[]) => {
 
         // Getting current settings
-        const formatAfterSave = vscode.workspace.getConfiguration().get('formatContextMenu.saveAfterFormat') as boolean;
+        const saveAfterFormat = vscode.workspace.getConfiguration().get('formatContextMenu.saveAfterFormat') as boolean;
         const closeAfterSave = vscode.workspace.getConfiguration().get('formatContextMenu.closeAfterSave') as boolean;
 
-        for (let i = 0; i < uris.length; i++) {
-            const uri = uris[i];
-            try {
-                await vscode.window.showTextDocument(uris[i], { preserveFocus: false, preview: true });
-                await vscode.commands.executeCommand('editor.action.formatDocument', uri);
-                if (formatAfterSave) {
-                    await vscode.commands.executeCommand('workbench.action.files.save', uri);
-                    if (closeAfterSave) {
-                        await vscode.commands.executeCommand('workbench.action.closeActiveEditor', uri);
-                    }
+        const increment = (1 / uris.length) * 100;
+
+        const progressOptions: vscode.ProgressOptions = {
+            location: vscode.ProgressLocation.Notification,
+            title: 'Formatting files',
+            cancellable: true,
+        };
+
+        vscode.window.withProgress(progressOptions, async (progress: vscode.Progress<{ message?: string; increment?: number }>, cancellationToken: vscode.CancellationToken) => {
+            for (let i = 0; i < uris.length; i++) {
+                const uri = uris[i];
+                if (cancellationToken.isCancellationRequested) {
+                    break;
                 }
-            } catch (exception) {
-                vscode.window.showWarningMessage(`Could not format file ${uri}`);
+                try {
+                    progress.report({
+                        message: `${i + 1}/${uris.length}`
+                    });
+                    await vscode.window.showTextDocument(uris[i], { preserveFocus: false, preview: true });
+                    await vscode.commands.executeCommand('editor.action.formatDocument', uri);
+                    if (saveAfterFormat) {
+                        await vscode.commands.executeCommand('workbench.action.files.save', uri);
+                        if (closeAfterSave) {
+                            await vscode.commands.executeCommand('workbench.action.closeActiveEditor', uri);
+                        }
+                    }
+                } catch (exception) {
+                    vscode.window.showWarningMessage(`Could not format file ${uri}`);
+                }
+                progress.report({
+                    increment: increment,
+                });
             }
-        }
+        });
+
     };
 
     const getRecursiveUris = async (uris: vscode.Uri[]) => {
@@ -57,7 +77,7 @@ export function activate(context: vscode.ExtensionContext) {
         }),
 
         vscode.commands.registerCommand('extension.formatSelectedFilesFromExplorerContext', async (clickedFile: vscode.Uri, selectedFiles: vscode.Uri[]) => {
-            const uris = await getRecursiveUris(selectedFiles ? selectedFiles : [clickedFile]);
+            const uris = await getRecursiveUris(selectedFiles || [clickedFile]);
             await formatUris(uris);
         })
 
