@@ -29,10 +29,12 @@ export function activate(context: vscode.ExtensionContext) {
                     progress.report({
                         message: `${i + 1}/${uris.length}`
                     });
-                    await vscode.window.showTextDocument(uris[i], { preserveFocus: false, preview: true });
+                    const editor = await vscode.window.showTextDocument(uri, { preserveFocus: false, preview: true });
                     await vscode.commands.executeCommand('editor.action.formatDocument', uri);
                     if (saveAfterFormat) {
-                        await vscode.commands.executeCommand('workbench.action.files.save', uri);
+                        if (editor.document.isDirty) {
+                            await vscode.commands.executeCommand('workbench.action.files.save', uri);
+                        }
                         if (closeAfterSave) {
                             await vscode.commands.executeCommand('workbench.action.closeActiveEditor', uri);
                         }
